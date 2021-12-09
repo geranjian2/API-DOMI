@@ -52,4 +52,11 @@
 			}
 			return $myString;
 		}
+		function convertArray($array){
+			$emparray = array();
+			while ($row = $array) {
+				$emparray[] = $row;
+			}
+			return $emparray;
+		}
  ?>

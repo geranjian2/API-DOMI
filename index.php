@@ -4,16 +4,20 @@ include './helpers/functions.php';
 include './routes/routes.php';
 include './helpers/handler.php';
 include './helpers/validate_routes.php';
-include	'./helpers/response.php';
 include './passport/jwt.class.php';
+include	'./helpers/response.php';
+include './conexion/conexion.php';
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
+// header("Content-Type: application/json");
+
+
 
 $request = $_SERVER;
 
 $response_handler = handler($request['REQUEST_URI']);
 
 $request= array_merge($request,$response_handler);
+
 
 validate_route($routes,$request);
 /*********************************

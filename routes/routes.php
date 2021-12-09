@@ -13,7 +13,7 @@ $routes = [
     [
         'name' => 'updateUser',
         'route' => '/user/update/',
-        'method' => 'PUT'
+        'method' => 'POST'
     ],
     [
         'name' => 'getUsers',
@@ -28,6 +28,11 @@ $routes = [
     [
         'name' => 'loginUser',
         'route' => '/user/login/',
+        'method' => 'POST'
+    ],
+    [
+        'name' => 'logoutUser',
+        'route' => '/user/logout/',
         'method' => 'POST'
     ]
 ];
