@@ -7,14 +7,21 @@ include './helpers/validate_routes.php';
 include './passport/jwt.class.php';
 include	'./helpers/response.php';
 include './conexion/conexion.php';
-header("Access-Control-Allow-Origin: *");
-// header("Content-Type: application/json");
+include './helpers/upload.php';
+header('Access-Control-Allow-Origin: *');
 
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+// header("Content-Type: application/json");
 
 
 $request = $_SERVER;
 
 $response_handler = handler($request['REQUEST_URI']);
+
+
+
 
 $request= array_merge($request,$response_handler);
 
@@ -27,7 +34,11 @@ $resource_file_name = "./{$request['VERSION']}/{$request['RESOURCE']}.resource.p
 if (file_exists($resource_file_name)) {
 	require_once($resource_file_name);
 	$func_name = $request['FUNCTION'];
-	$func_name($request);
+	if(is_callable($func_name)){
+		$func_name($request);
+	}else{
+		json_encode_response("El funcion {" . $func_name . "} no existe", 404, null);
+	}
 } else {
 	json_encode_response("El archivo {" . $get_resource . "} no existe", 404, null);
 }

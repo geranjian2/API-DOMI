@@ -5,7 +5,7 @@ function connectDB(){
     $server = "localhost";
     $user = "root";
     $pass = "";
-    $bd = "lists";
+    $bd = "domi";
 
 
     $conexion = mysqli_connect($server, $user, $pass,$bd) 

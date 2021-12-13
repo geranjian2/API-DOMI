@@ -34,5 +34,25 @@ $routes = [
         'name' => 'logoutUser',
         'route' => '/user/logout/',
         'method' => 'POST'
+    ],
+    [
+        'name' => 'getAllRestaurants',
+        'route' => '/restaurant/all/',
+        'method' => 'GET'
+    ],
+    [
+        'name' => 'productByIdRestaurant',
+        'route' => '/product/getbyidrestaurant/',
+        'method' => 'GET'
+    ],
+    [
+        'name' => 'save',
+        'route' => '/order/save/',
+        'method' => 'POST'
+    ],
+    [
+        'name' => 'orderDetailById',
+        'route' => '/order_details/getByOrderDetail/',
+        'method' => 'GET'
     ]
 ];

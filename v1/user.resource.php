@@ -1,24 +1,38 @@
 <?php
+    include "./v1/models/user.php";
     function save($req){
         $conexion = connectDB();
         $body = $req['BODY'];
-        $nombre = $body->nombre;
-        $apellido = $body->apellido;
+        $files = $req['FILES'];
+        $name = $body->name;
+        $last_name = $body->last_name;
         $email = $body->email;
-        $celular = $body->celular;
-        $telefono = $body->telefono;
-        $foto = $body->foto;
-        $direccion = $body->direccion;
+        $date_birth = $body->date_birth;
+        $cell_phone = $body->cell_phone;
+        $telephone = $body->telephone;
+        $photo = "Foto";
+        $address = $body->address;
+        $password = $body->password;
+        $role = $body->role;
+        $valid_email = validate_email($req); 
+        if($valid_email === 1){
+            json_encode_response('El usuario ya existe', 400, null);
+        }
+        $route_image = upload( $files['photo'],"users" );
+       if($route_image === 0){
+        json_encode_response('La imagen no se ha podio cargar correctamente', 400, null);
+       }
+        
 
-        $sql_stmt = "INSERT INTO lists.users (nombre, apellido, direccion, telefono, celular, email, foto)
-    VALUES('{$nombre}','{$apellido}','{$direccion}', '{$telefono}', '{$celular}','{$email}', '{$foto}')";
+        $sql_stmt = "INSERT INTO domi.users ( name, last_name , email, date_birth, cell_phone, telephone, photo, address, password , role  )
+    VALUES('{$name}','{$last_name}','{$email}', '{$date_birth}', '{$cell_phone}','{$telephone}', '{$route_image}','{$address}','{$password}','{$role}')";
 
         $result = mysqli_query( $conexion, $sql_stmt )or die( json_encode_response(mysqli_error( $conexion ), 400, null) );
 
         if ( $result ) {
-            json_encode_response('usuario creado exitosamente', 200, null);
+            json_encode_response('El usuario se ha creado exitosamente', 200, null);
         } else {
-            json_encode_response('EL usuario no se ha podio crear', 400, null);
+            json_encode_response('El usuario no se ha podio crear correctamente', 400, null);
         }
 
     }
@@ -73,8 +87,9 @@
         $conexion = connectDB();
         $body = $req['BODY'];
         $email = $body->email;
+        $password = $body->password;
 
-        $sql_stmt = "SELECT nombre, apellido, email, direccion FROM users WHERE email= '{$email}'";
+        $sql_stmt = "SELECT name, last_name, email,role, address FROM users WHERE email= '{$email}' AND password= '{$password}'";
 
         $result = mysqli_query($conexion,$sql_stmt) or die( json_encode_response(mysqli_error( $conexion ), 400, null) );
 

@@ -4,6 +4,14 @@
         $_ARRAY_PARAMS = [];
 
         /*********************************
+         * obtener la folder del proyecto *
+         *********************************/
+        $project['char'] = "/";
+        $project['String'] = $_REQUEST_URI;
+        $project['posicion'] = 1;
+        $project = getExplode($project);
+        
+        /*********************************
          * obtener la version del servicio *
          *********************************/
         $version['char'] = "/";
@@ -30,7 +38,7 @@
         /*********************************
          *    recurso de refencia Class    *
          *********************************/
-        $segmentoApi        =  "/apiStore/" . $version . "/";
+        $segmentoApi        =  "/{$project}/" . $version . "/";
         $uriNew   = str_replace($segmentoApi, "", $_REQUEST_URI);
 
         /*********************************
@@ -44,14 +52,17 @@
         unset($getVars[0]);
         unset($getVars[1]);
         $params_uri = array_values($getVars);
-
         /*********************************
          *    obtener variables  body    *
          *********************************/
+        
         $json = file_get_contents('php://input');
         $body = json_decode($json);
+        if(!$body){
+            $body = (object) $_POST;
+        }
 
-        array_push($_ARRAY_PARAMS, [ 'RESOURCE' => $get_resource,  'FUNCTION' => $get_function, 'VERSION' => $version,  'PARAMS' => $params_uri, 'BODY' => $body]);
+        array_push($_ARRAY_PARAMS, [ 'RESOURCE' => $get_resource,  'FUNCTION' => $get_function, 'VERSION' => $version,  'PARAMS' => $params_uri, 'BODY' => $body, 'FILES' => $_FILES]);
 
 
         return $_ARRAY_PARAMS[0];
