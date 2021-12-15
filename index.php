@@ -13,7 +13,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
-// header("Content-Type: application/json");
+header('Content-Type: application/json; charset=utf-8');
+
+$DOMAIN['DOMAIN'] = 'http://localhost/API-DOMI/';
 
 
 $request = $_SERVER;
@@ -24,6 +26,7 @@ $response_handler = handler($request['REQUEST_URI']);
 
 
 $request= array_merge($request,$response_handler);
+$request= array_merge($request,$DOMAIN);
 
 
 validate_route($routes,$request);

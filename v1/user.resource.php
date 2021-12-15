@@ -1,5 +1,7 @@
 <?php
     include "./v1/models/user.php";
+    include "./v1/models/restaurant.php";
+
     function save($req){
         $conexion = connectDB();
         $body = $req['BODY'];
@@ -10,7 +12,6 @@
         $date_birth = $body->date_birth;
         $cell_phone = $body->cell_phone;
         $telephone = $body->telephone;
-        $photo = "Foto";
         $address = $body->address;
         $password = $body->password;
         $role = $body->role;
@@ -89,7 +90,7 @@
         $email = $body->email;
         $password = $body->password;
 
-        $sql_stmt = "SELECT name, last_name, email,role, address FROM users WHERE email= '{$email}' AND password= '{$password}'";
+        $sql_stmt = "SELECT id, name, last_name, email,role, address, photo FROM users WHERE email= '{$email}' AND password= '{$password}'";
 
         $result = mysqli_query($conexion,$sql_stmt) or die( json_encode_response(mysqli_error( $conexion ), 400, null) );
 
@@ -98,6 +99,8 @@
              
              if($rows){
                 $list_users=mysqli_fetch_assoc($result);
+                $list_users['photo'] = "{$req['DOMAIN']}{$list_users['photo']}";
+                $list_users['restaurant'] = restaurantByIdUser($list_users['id'],$req);
                 json_encode_response('usuario Logueado', 200, $list_users);
              }else{
                 json_encode_response('usuario no existe o contraseña incorrecta', 200);

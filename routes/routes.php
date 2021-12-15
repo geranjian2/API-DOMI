@@ -46,6 +46,16 @@ $routes = [
         'method' => 'GET'
     ],
     [
+        'name' => 'getAllProduct',
+        'route' => '/product/all/',
+        'method' => 'GET'
+    ],
+    [
+        'name' => 'saveProduct',
+        'route' => '/product/save/',
+        'method' => 'POST'
+    ],
+    [
         'name' => 'save',
         'route' => '/order/save/',
         'method' => 'POST'

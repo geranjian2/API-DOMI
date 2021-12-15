@@ -8,6 +8,7 @@ function all($req){
         if($rows){
             $emparray = array();
             while ($row = mysqli_fetch_assoc($result)) {
+                $row['thumbnail'] = "{$req['DOMAIN']}{$row['thumbnail']}";
                 $emparray[] = $row;
             }
             json_encode_response('Restaurantes', 200, $emparray);

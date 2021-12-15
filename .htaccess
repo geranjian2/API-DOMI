@@ -1,4 +1,8 @@
 RewriteEngine On
 RewriteCond %{ENV:REDIRECT_STATUS} !=200
+### IMAGE RULES	
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule   ^(.*)$ index.php    [NC,L]
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+# RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
