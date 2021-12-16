@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2021 a las 07:45:10
+-- Tiempo de generación: 17-12-2021 a las 00:18:20
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 7.3.33
 
@@ -94,26 +94,27 @@ CREATE TABLE `products` (
   `description` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL COMMENT 'descripcion del producto ',
   `thumbanail` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL COMMENT 'miniatura del producto ',
   `restaurant_id` int(11) NOT NULL COMMENT 'id principal del restaurante',
-  `stock` int(11) NOT NULL COMMENT 'stock de productos disponibles '
+  `stock` int(11) NOT NULL COMMENT 'stock de productos disponibles ',
+  `status` varchar(1) COLLATE utf8mb4_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `description`, `thumbanail`, `restaurant_id`, `stock`) VALUES
-(1, 'Empanada', '2000', 'Deliciosa empanada calientita, con el mejor aji. ', './images/products/empanada1.jpg', 1, 10),
-(2, 'Ajiaco', '5000', 'Delicioso Ajiaco', './images/products/ajiaco.jpg', 1, 10),
-(3, 'Hamburguesa', '15000', 'Hamburguesa deliciosa', './images/products/hamburguesa.jpg', 1, 5),
-(4, 'Perro Caliente', '10000', 'Los perros calientes', './images/products/perroscalientes.jpg', 1, 6),
-(5, 'Salchipapas', '5000', 'Salchipapas deliciosas', './images/products/salchipapas.jpg', 2, 5),
-(6, 'Pasta bolognesa', '20000', 'Bien Deliciosa pasta', './images/products/pasta.jpeg', 3, 15),
-(7, 'Lasagna', '18000', 'Deliciosa Lasagna', './images/products/lasagna.jpg', 3, 10),
-(8, 'Pasta con verduras', '15000', 'Deliciosa pasta con verduras', './images/products/pastaverduras.png', 3, 8),
-(9, 'pasta con queso', '19000', 'Deliciosa pasta con queso', './images/products/pastaqueso.jpg', 3, 20),
-(10, 'Carne Asada', '15000', 'Deliciosa carne asada', './images/products/carneasada.jpg', 2, 10),
-(11, 'Pechuga a la Plancha', '200000', 'Deliciosa pechuga a la plancha', './images/products/pechuga_pollo.jpg', 2, 8),
-(12, 'Mojarra frita', '25000', 'Deliciosa mojarra frita', './images/products/pescado_frito.jpg', 2, 10);
+INSERT INTO `products` (`id`, `name`, `price`, `description`, `thumbanail`, `restaurant_id`, `stock`, `status`) VALUES
+(1, 'Empanada', '2000', 'Deliciosa empanada calientita, con el mejor aji. ', './images/products/empanada1.jpg', 1, 10, '1'),
+(2, 'Ajiaco', '5000', 'Delicioso Ajiaco', './images/products/ajiaco.jpg', 1, 10, '1'),
+(3, 'Hamburguesa', '15000', 'Hamburguesa deliciosa', './images/products/hamburguesa.jpg', 1, 5, '1'),
+(4, 'Perro Caliente', '10000', 'Los perros calientes', './images/products/perroscalientes.jpg', 1, 6, '1'),
+(5, 'Salchipapas', '5000', 'Salchipapas deliciosas', './images/products/salchipapas.jpg', 2, 5, '1'),
+(6, 'Pasta bolognesa', '20000', 'Bien Deliciosa pasta', './images/products/pasta.jpeg', 3, 15, '1'),
+(7, 'Lasagna', '18000', 'Deliciosa Lasagna', './images/products/lasagna.jpg', 3, 10, '1'),
+(8, 'Pasta con verduras', '15000', 'Deliciosa pasta con verduras', './images/products/pastaverduras.png', 3, 8, '1'),
+(9, 'pasta con queso', '19000', 'Deliciosa pasta con queso', './images/products/pastaqueso.jpg', 3, 20, '1'),
+(10, 'Carne Asada', '15000', 'Deliciosa carne asada', './images/products/carneasada.jpg', 2, 10, '1'),
+(11, 'Pechuga a la Plancha', '200000', 'Deliciosa pechuga a la plancha', './images/products/pechuga_pollo.jpg', 2, 8, '1'),
+(12, 'Mojarra frita', '25000', 'Deliciosa mojarra frita', './images/products/pescado_frito.jpg', 2, 10, '1');
 
 -- --------------------------------------------------------
 
