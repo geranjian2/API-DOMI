@@ -56,7 +56,7 @@ $routes = [
         'method' => 'POST'
     ],
     [
-        'name' => 'save',
+        'name' => 'saveOrder',
         'route' => '/order/save/',
         'method' => 'POST'
     ],
@@ -64,5 +64,10 @@ $routes = [
         'name' => 'orderDetailById',
         'route' => '/order_details/getByOrderDetail/',
         'method' => 'GET'
+    ],
+    [
+        'name' => 'updateProduct',
+        'route' => '/product/update/',
+        'method' => 'POST'
     ]
 ];

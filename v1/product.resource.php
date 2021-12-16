@@ -68,7 +68,36 @@ function save($req){
     }
 
 }
+function update($req){
+    $conexion = connectDB();
+    $body = $req['BODY'];
+    $params = $req['PARAMS'];
+    $id_product = $params[0];
+    $files = $req['FILES'];
+    $name = $body->name;
+    $price = $body->price;
+    $description = $body->description;
+    $restaurant_id = $body->restaurant_id;
+    $stock = $body->stock;
+    
+    $route_image = upload( $files['thumbanail'],"products" );
+   if($route_image === 0){
+    json_encode_response('La imagen no se ha podio cargar correctamente', 400, null);
+   }
+    
 
+    $sql_stmt = "UPDATE domi.products
+    SET name='{$name}', price='{$price}', description='{$description}', thumbanail='{$route_image}', restaurant_id='{$restaurant_id}', stock='{$stock}'
+    WHERE id={$id_product}";
+    $result = mysqli_query( $conexion, $sql_stmt )or die( json_encode_response(mysqli_error( $conexion ), 400, null) );
+
+    if ( $result ) {
+        json_encode_response('El producto se actualizo exitosamente', 200, null);
+    } else {
+        json_encode_response('El producto no se actualizo correctamente', 400, null);
+    }
+
+}
 
 
 ?>
