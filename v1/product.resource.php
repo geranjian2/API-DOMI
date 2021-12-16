@@ -4,7 +4,7 @@ function getbyidrestaurant($req){
     $params = $req['PARAMS'];
     $id_restaurant = $params[0];
 
-    $sql_stmt = "SELECT id, name, price, description, thumbanail,stock FROM products  WHERE restaurant_id = $id_restaurant"; 
+    $sql_stmt = "SELECT id, name, price, description, thumbanail,stock FROM products  WHERE restaurant_id = $id_restaurant and status = 1"; 
     $result = mysqli_query($conexion,$sql_stmt) or die( json_encode_response(mysqli_error( $conexion ), 400, null) );
     if($result){
         $rows=mysqli_num_rows($result);
@@ -23,7 +23,7 @@ function getbyidrestaurant($req){
 function all($req){
     $conexion = connectDB();
 
-    $sql_stmt = "SELECT id, name, price, description, thumbanail,stock FROM products"; 
+    $sql_stmt = "SELECT id, name, price, description, thumbanail,stock FROM products  and status = 1"; 
     $result = mysqli_query($conexion,$sql_stmt) or die( json_encode_response(mysqli_error( $conexion ), 400, null) );
     if($result){
         $rows=mysqli_num_rows($result);
@@ -98,6 +98,20 @@ function update($req){
     }
 
 }
+function delete($req){
+    $conexion = connectDB();
+    $params = $req['PARAMS'];
+    $id_product = $params[0];
 
+    $sql_stmt = "UPDATE domi.products
+    SET status='0' WHERE id={$id_product}"; 
+
+    $result = mysqli_query($conexion,$sql_stmt) or die( json_encode_response(mysqli_error( $conexion ), 400, null) );
+    if ( $result ) {
+        json_encode_response('El producto se elimino exitosamente', 200, null);
+    } else {
+        json_encode_response('El producto no se ha eliminado correctamente', 400, null);
+    }
+}
 
 ?>

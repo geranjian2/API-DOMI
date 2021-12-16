@@ -69,5 +69,10 @@ $routes = [
         'name' => 'updateProduct',
         'route' => '/product/update/',
         'method' => 'POST'
+    ],
+    [
+        'name' => 'deleteProduct',
+        'route' => '/product/delete/',
+        'method' => 'POST'
     ]
 ];
